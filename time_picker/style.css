@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+:root {
+    --primary-color: #1564bf;
+    --primary-color-lighter: #edf5ff;
+    --primary-color-darker: #104a8b;
+    --grey: #f5f5f5;
+    --light-gray: #bebebe; 
+}
+
+* {
+    font-family: sans-serif;
+    border: 1px solid rgba(225, 225, 225, 0);
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 5px;
+    margin: 1px;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.pl-2 {
+    padding-left: 1rem;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    background: none;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    outline: none;
+    border: none;
+}
+
+button:hover {
+    background: var(--primary-color-lighter);
+    border-radius: 5px;
+}
+
+.border {
+    background: none;
+}
+
+.no-border {
+    border: none;
+}
+
+.outer-box {
+    width: 300px;
+    height: 480px;
+    border-radius: 0.75rem;
+    background: white;
+    box-shadow: 0 15px 30px lightgray;
+    padding-top: 20px;
+}
+
+.outer-box ul {
+    list-style: none;
+}
+
+
+.time-title {
+    font-size: small;
+    font-weight: bold;
+    min-height: 30px;
+    color: var(--primary-color-darker);
+    padding-left: 25px;
+}
+
+.time-text {
+    align-items: center;
+    justify-content: center;
+    padding-left: 25px;
+    padding-right: 10px;
+    min-height: 70px;
+}
+
+.time-text p {
+    font-weight: 500;
+    font-size: xxx-large;
+    text-align: center;
+    padding-right: 15px;
+}
+
+
+.time-ampm {
+    width: 200px;
+    height: 100%;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+    padding-left: 20px;
+    padding-right: 10px;
+}
+
+.time-ampm input[type="radio"] {
+    display: none;
+}
+
+.time-ampm label {
+    font-size: medium;
+    font-weight: 600;
+    color: var(--light-gray);
+}
+
+label.time-of-day-selected {
+    color: black;
+}
+
+.time-text input[type="text"] {
+    outline: none;
+    background-color: var(--grey);
+    border-radius: 5px;
+    font-size: xxx-large;
+    font-weight: 500;
+    text-align: center;
+    padding: 0rem 0.75rem;
+    height: 100%;
+    color: var(--light-gray);
+    caret-color: transparent;
+}
+
+input[type="text"].mode-selected {
+    color: black;
+    /* background-color: var(--primary-color-lighter);   */
+}
+
+.time-clock {
+    position: relative;
+    flex: auto;
+    padding: 25px;
+}
+
+.time-circle {
+    flex: auto;
+    background-color: var(--grey);
+    border-radius: 100%;
+}
+
+.time-clock li {
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50vh;
+    text-align: center;
+}
+
+.time-buttons {
+    justify-content: end;
+    min-height: 50px;
+    padding-right: 20px;
+    gap: 10px;
+}
+
+.time-buttons button {
+    color: var(--primary-color);
+}
+
+.selected {
+    background: var(--primary-color);
+    color: white;
+}
+
+.time-center {
+    position: absolute;
+    /* background-color: grey; */
+}
+
+.time-center p {
+    color: var(--primary-color);
+    font-size: x-large;
+}
+
+.time-pointer {
+    position: absolute;
+    /* background-color: rgba(225, 225, 225, 1); */
+    border-top: #1564bf solid 2px;
+    transform-origin: top left;
+}
+
+.time-pointer p {
+    color: var(--primary-color);
+}
