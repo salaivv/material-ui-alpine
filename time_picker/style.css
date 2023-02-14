@@ -20,6 +20,10 @@
     font-family: 'Roboto', sans-serif;
 }
 
+a {
+    color: gray;
+}
+
 body {
     align-items: center;
     justify-content: center;
@@ -33,7 +37,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    height: 90%;
 }
 
 .pl-2 {
