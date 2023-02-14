@@ -57,6 +57,18 @@ button {
     border: none;
 }
 
+.time {
+    border: 2px solid gray;
+    border-radius: 50vh;
+    color: gray;
+    font-size: larger;
+}
+
+.time:hover {
+    background: var(--grey);
+    border-radius: 50vh;
+}
+
 button:hover {
     background: var(--primary-color-lighter);
     border-radius: 5px;
@@ -205,8 +217,4 @@ input[type="text"].mode-selected {
     /* background-color: rgba(225, 225, 225, 1); */
     border-top: #1564bf solid 2px;
     transform-origin: top left;
-}
-
-.time-pointer p {
-    color: var(--primary-color);
 }
