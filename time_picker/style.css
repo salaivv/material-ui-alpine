@@ -24,6 +24,9 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
+    position: relative;
+    margin: 0;
+    padding: 0;
 }
 
 .container {
@@ -74,6 +77,8 @@ button:hover {
     background: white;
     box-shadow: 0 15px 30px lightgray;
     padding-top: 20px;
+    z-index: 100;
+    position: absolute;
 }
 
 .outer-box ul {
@@ -140,6 +145,7 @@ label.time-of-day-selected {
     height: 100%;
     color: var(--light-gray);
     caret-color: transparent;
+    cursor: default;
 }
 
 input[type="text"].mode-selected {
@@ -165,6 +171,7 @@ input[type="text"].mode-selected {
     height: 2rem;
     border-radius: 50vh;
     text-align: center;
+    user-select: none;
 }
 
 .time-buttons {
