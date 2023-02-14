@@ -8,98 +8,106 @@
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <div class="container">
-    <!-- <div x-data="{ modal: false }">
-      <button @click="modal = true">Open</button>
+      <div class="outer-box flex-column no-border"
+          x-data="{ 
+              time_of_day: 'am',
+              hourIndex: 5,
+              minuteIndex: 5,
+              mode: 'hour'
+          }"
+          
+          x-effect="console.log(`${HOURS[hourIndex]}:${MINUTES[minuteIndex]} ${time_of_day.toUpperCase()}`)">
 
-      <div x-show="modal" @click.outside="modal = false" class="time-picker">
-        <h1>Salai</h1>
-      </div>
-    </div> -->
+        <p class="pl-2 time-title">Select Time</p>
 
-    <div class="outer-box flex-column no-border"
-         x-data="{ 
-            time_of_day: 'am',
-            hourIndex: 5,
-            minuteIndex: 5,
-            mode: 'hour'
-         }" x-effect="console.log(`${HOURS[hourIndex]}:${MINUTES[minuteIndex]} ${time_of_day.toUpperCase()}`)">
-      <p class="pl-2 time-title">Select Time</p>
+        <div class="time-text flex">
+          <input type="text" 
+                name="hour" 
+                :value="HOURS[hourIndex].padStart(2, '0')"
+                :class="mode == 'hour' && 'mode-selected'"
+                @click.prevent="mode = 'hour'"
+                readonly="readonly">
+          <p>:</p>
 
-      <div class="time-text flex">
-        <input type="text" 
-               name="hour" 
-               :value="HOURS[hourIndex].padStart(2, '0')"
-               :class="mode == 'hour' && 'mode-selected'"
-               @click.prevent="mode = 'hour'"
-               readonly="readonly">
-        <p>:</p>
-        <input type="text" 
-               name="minutes" 
-               :value="MINUTES[minuteIndex]"
-               :class="mode == 'minute' && 'mode-selected'"
-               @click.prevent="mode = 'minute'"
-               readonly="readonly">
+          <input type="text" 
+                name="minutes" 
+                :value="MINUTES[minuteIndex]"
+                :class="mode == 'minute' && 'mode-selected'"
+                @click.prevent="mode = 'minute'"
+                readonly="readonly">
 
-        <div class="time-ampm flex-column">
-          <label for="am" :class="time_of_day == 'am' && 'time-of-day-selected'" @click="time_of_day='am'">
-            <input type="radio" name="time-of-day" value="am">
-            <span>AM</span>
-          </label>
-          <label for="pm" :class="time_of_day == 'pm' && 'time-of-day-selected'" @click="time_of_day='pm'">
-            <input type="radio" name="time-of-day" value="pm">
-            <span>PM</span>
-          </label>
+          <div class="time-ampm flex-column">
+            <label for="am" :class="time_of_day == 'am' && 'time-of-day-selected'" @click="time_of_day='am'">
+              <input type="radio" name="time-of-day" value="am">
+              <span>AM</span>
+            </label>
+            
+            <label for="pm" :class="time_of_day == 'pm' && 'time-of-day-selected'" @click="time_of_day='pm'">
+              <input type="radio" name="time-of-day" value="pm">
+              <span>PM</span>
+            </label>
+          
+          </div>
         </div>
-      </div>
-      <div class="time-clock flex" x-ref="clock" x-data
-           :style="{
-            maxHeight: `${$el.clientWidth}px`,
-            minHeight: `${$el.clientWidth}px`
-           }">
-        <div class="time-center"
-             :style="{
-              top: `${$refs.clock.clientHeight / 2 - $el.clientHeight / 2}px`,
-              left: `${$refs.clock.clientWidth / 2 - $el.clientWidth / 2}px`,
-             }">
-          <p>•</p>
-        </div>
-        <div class="time-pointer"
-             :style="{
-                top: `${$refs.clock.clientHeight / 2}px`,
-                left: `${$refs.clock.clientWidth / 2 + 1}px`,
-                width: `30%`,
-                transform: `rotate(${mode == 'hour' ? (hourIndex - 2) * 30 : (minuteIndex - 2) * 30}deg)`
-             }">
-        </div>
-        <div class="time-circle">
-          <ul class="no-border">
-            <template x-for="hour, index in HOURS">
-              <li x-text="mode == 'hour' ? hour : MINUTES[index]" 
-                  :style="{
+
+        <div class="time-clock flex" x-ref="clock" x-data
+            :style="{
+                maxHeight: `${$el.clientWidth}px`,
+                minHeight: `${$el.clientWidth}px`
+            }">
+          <div class="time-center"
+              :style="{
+                  top: `${$refs.clock.clientHeight / 2 - $el.clientHeight / 2}px`,
+                  left: `${$refs.clock.clientWidth / 2 - $el.clientWidth / 2}px`,
+              }">
+            <p>•</p>
+          </div>
+
+          <div class="time-pointer"
+              :style="{
+                  top: `${$refs.clock.clientHeight / 2}px`,
+                  left: `${$refs.clock.clientWidth / 2 + 1}px`,
+                  width: `30%`,
+                  transform: `rotate(${mode == 'hour' ? (hourIndex - 2) * 30 : (minuteIndex - 2) * 30}deg)`
+              }">
+          </div>
+
+          <div class="time-circle">
+            <ul class="no-border">
+              <template x-for="hour, index in HOURS">
+                
+                <li x-text="mode == 'hour' ? hour : MINUTES[index]" 
+                    
+                    :style="{
                       top: `${$refs.clock.clientHeight / 2 - $el.clientHeight / 2 + (RADIUS * Math.sin((index + 1) * 30 * Math.PI/180 + ROTATION))}px`,
                       left: `${$refs.clock.clientWidth / 2 - $el.clientWidth / 2 + (RADIUS * Math.cos((index + 1) * 30 * Math.PI/180 + ROTATION))}px`
-                  }"
-                  :class="(mode == 'hour' && index == hourIndex) || (mode == 'minute' && index == minuteIndex) ? 'selected' : ''"
-                   @click="mode == 'hour' ? hourIndex = index : minuteIndex = index"></li>
-            </template>
-          </ul>
+                    }"
+                    
+                    :class="(mode == 'hour' && index == hourIndex) || (mode == 'minute' && index == minuteIndex) ? 'selected' : ''"
+                    
+                    @click="mode == 'hour' ? hourIndex = index : minuteIndex = index"></li>
+              </template>
+            </ul>
+          </div>
+        </div>
+
+        <div class="time-buttons flex">
+          <button>Cancel</button>
+          <button>OK</button>
         </div>
       </div>
 
-      <div class="time-buttons flex">
-        <button>Cancel</button>
-        <button>OK</button>
-      </div>
-    </div>
+      <script>
+        const RADIUS = 90
+        const ROTATION = -Math.PI/2
+        const HOURS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
+        const MINUTES = ['05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55', '00']
+      </script>
 
-    <script>
-      const RADIUS = 90
-      const ROTATION = -Math.PI/2
-      const HOURS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
-      const MINUTES = ['05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55', '00']
-    </script>
   </div>
+  
 </body>
 </html>
