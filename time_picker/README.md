@@ -2,4 +2,4 @@
 
 A simple Material UI time picker component using Alpine.js.
 
-![Time Picker](./time_picker.gif)
+<img src="./time_picker.gif" width="400px">
