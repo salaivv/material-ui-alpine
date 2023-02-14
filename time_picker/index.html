@@ -10,16 +10,29 @@
 </head>
 
 <body>
-  <div class="container">
-      <div class="outer-box flex-column no-border"
-          x-data="{ 
-              time_of_day: 'am',
-              hourIndex: 5,
-              minuteIndex: 5,
-              mode: 'hour'
-          }"
-          
-          x-effect="console.log(`${HOURS[hourIndex]}:${MINUTES[minuteIndex]} ${time_of_day.toUpperCase()}`)">
+  <div class="container" 
+       x-data="{ 
+          modal: false,
+          time_of_day: 'am',
+          hourIndex: 5,
+          minuteIndex: 5,
+          mode: 'hour',
+
+          get timeString() {
+            return `${HOURS[this.hourIndex]}:${MINUTES[this.minuteIndex]} ${this.time_of_day.toUpperCase()}`
+          }
+       }"
+       
+       @keydown.escape="modal=false">
+    <button @click="modal = true" class="time" x-text="timeString"></button>
+
+    <template x-if="modal">
+      <div class="outer-box flex-column no-border" 
+           x-data="{
+              currentHour: hourIndex,
+              currentMinute: minuteIndex
+           }"
+           x-effect="console.log(timeString)">
 
         <p class="pl-2 time-title">Select Time</p>
 
@@ -69,7 +82,7 @@
           <div class="time-pointer"
               :style="{
                   top: `${$refs.clock.clientHeight / 2}px`,
-                  left: `${$refs.clock.clientWidth / 2 + 1}px`,
+                  left: `${$refs.clock.clientWidth / 2 + 2}px`,
                   width: `30%`,
                   transform: `rotate(${mode == 'hour' ? (hourIndex - 2) * 30 : (minuteIndex - 2) * 30}deg)`
               }">
@@ -95,10 +108,11 @@
         </div>
 
         <div class="time-buttons flex">
-          <button>Cancel</button>
-          <button>OK</button>
+          <button @click="hourIndex = currentHour; minuteIndex = currentMinute; modal = false">Cancel</button>
+          <button @click="modal = false">OK</button>
         </div>
       </div>
+    </template>
 
       <script>
         const RADIUS = 90
